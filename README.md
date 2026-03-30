@@ -96,7 +96,7 @@ JWT_SECRET=your_jwt_secret
 
 ---
 
-Future Improvements
+## Future Improvements
 ---
 Email notifications
 Real-time updates
