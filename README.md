@@ -54,8 +54,6 @@ task-management-system/
 ├── client/         # React frontend
 ├── server/         # Node.js + Express backend
 ├── database/       # SQL scripts
-├── .env
-└── README.md
 
 ---
 
@@ -97,11 +95,11 @@ JWT_SECRET=your_jwt_secret
 ---
 
 ## Future Improvements
----
-Email notifications
-Real-time updates
-Kanban board
-Dashboard analytics
-Calendar integration
-Mobile responsiveness improvements
+
+- Email notifications
+- Real-time updates
+- Kanban board
+- Dashboard analytics
+- Calendar integration
+- Mobile responsiveness improvements
 
