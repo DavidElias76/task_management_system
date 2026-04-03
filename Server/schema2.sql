@@ -1,4 +1,3 @@
--- ─── 1. Users ─────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -8,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ─── 2. Tasks (updated from your existing schema) ────────────────────────────
 CREATE TABLE IF NOT EXISTS tasks (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
@@ -25,7 +23,6 @@ CREATE TABLE IF NOT EXISTS tasks (
     FOREIGN KEY (assignee) REFERENCES users(username) ON UPDATE CASCADE,
     FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE CASCADE
 );
--- ─── 3. Task Status History ───────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS task_status_history (
     id INT PRIMARY KEY AUTO_INCREMENT,
     task_id INT NOT NULL,
@@ -37,7 +34,6 @@ CREATE TABLE IF NOT EXISTS task_status_history (
     FOREIGN KEY (changed_by) REFERENCES users(username) ON UPDATE CASCADE
 );
 
--- ─── 4. Time Logs ─────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS time_logs (
     id INT PRIMARY KEY AUTO_INCREMENT,
     task_id INT NOT NULL,
@@ -51,7 +47,6 @@ CREATE TABLE IF NOT EXISTS time_logs (
     FOREIGN KEY (user_id) REFERENCES users(username) ON UPDATE CASCADE
 );
 
--- ─── 5. Attachments ───────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS attachments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     task_id INT NOT NULL,
@@ -65,7 +60,6 @@ CREATE TABLE IF NOT EXISTS attachments (
     FOREIGN KEY (uploaded_by) REFERENCES users(username) ON UPDATE CASCADE
 );
 
--- ─── 6. Comments ──────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS comments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     task_id INT NOT NULL,

@@ -14,7 +14,6 @@ export default function Navbar() {
         fontFamily: "'DM Sans', system-ui, sans-serif",
       }}
     >
-      {/* Logo */}
       <div className="flex items-center gap-2.5">
         <div
           className="w-7 h-7 rounded-lg flex items-center justify-center"
@@ -33,7 +32,6 @@ export default function Navbar() {
         </span>
       </div>
 
-      {/* Theme toggle */}
       <button
         onClick={toggleTheme}
         className="relative flex items-center w-14 h-7 rounded-full p-0.5 transition-all duration-300 focus:outline-none"
@@ -45,11 +43,9 @@ export default function Navbar() {
         }}
         title={isDark ? "Switch to Light mode" : "Switch to Dark mode"}
       >
-        {/* Emoji labels on track */}
         <span className="absolute left-1 text-[11px] leading-none select-none pointer-events-none">🌙</span>
         <span className="absolute right-1 text-[11px] leading-none select-none pointer-events-none">☀️</span>
 
-        {/* Sliding thumb */}
         <span
           className="relative z-10 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300"
           style={{

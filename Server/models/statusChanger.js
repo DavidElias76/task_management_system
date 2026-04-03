@@ -12,7 +12,6 @@ export const getStatusHistory = async () => {
   }
 };
 
-// get current task status
 export const getTasksRows = async (id) => {
   try {
     const [rows] = await pool.query(
@@ -26,7 +25,6 @@ export const getTasksRows = async (id) => {
   }
 };
 
-// update task status
 export const updateTaskStatus = async (id, status) => {
   try {
     const [rows] = await pool.query(
@@ -40,7 +38,6 @@ export const updateTaskStatus = async (id, status) => {
   }
 };
 
-// insert history record
 export const addTaskStatusHistory = async (id, changed_by, oldStatus, newStatus) => {
   try {
     const [rows] = await pool.query(

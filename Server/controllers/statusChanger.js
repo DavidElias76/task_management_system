@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 dotenv.config();
 import {updateTaskStatus, getTasksRows, addTaskStatusHistory} from "../models/statusChanger.js"
 
-// add task history
 export const updateTaskStatusController = async (req, res) => {
     try{
         const {id} = req.params
@@ -24,7 +23,6 @@ export const updateTaskStatusController = async (req, res) => {
 
         const result = await updateTaskStatus(id, status)
 
-        // update the task status history 
         const addResult = await addTaskStatusHistory(id, changed_by, oldStatus, status)
 
         res.status(200).json({ message: "Task status updated", result, addResult}); 

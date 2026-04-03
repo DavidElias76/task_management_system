@@ -8,26 +8,21 @@ export const ThemeContext = createContext({
 
 function buildTokens(isDark) {
   return {
-    // ── Page & card surfaces ──
     bg: isDark ? "#0a0b0f" : "#f0f2f5",
     cardBg: isDark ? "rgba(255,255,255,0.04)" : "#ffffff",
     cardBord: isDark ? "rgba(255,255,255,0.08)" : "#e2e8f0",
 
-    // ── Text ──
     head: isDark ? "#f1f5f9" : "#0f172a",
     sub: isDark ? "#64748b" : "#94a3b8",
     body: isDark ? "#cbd5e1" : "#334155",
     muted: isDark ? "#475569" : "#94a3b8",
 
-    // ── Inputs ──
     inputBg: isDark ? "rgba(255,255,255,0.05)" : "#ffffff",
     inputBord: isDark ? "rgba(255,255,255,0.10)" : "#e2e8f0",
 
-    // ── Tags / pills ──
     tagBg: isDark ? "rgba(255,255,255,0.05)" : "#f1f5f9",
     tagBord: isDark ? "rgba(255,255,255,0.08)" : "#e2e8f0",
 
-    // ── Structural ──
     divider: isDark ? "rgba(255,255,255,0.06)" : "#e2e8f0",
     thBg: isDark ? "rgba(255,255,255,0.03)" : "#f8fafc",
     rowHov: isDark ? "rgba(255,255,255,0.03)" : "#f8fafc",
@@ -35,7 +30,6 @@ function buildTokens(isDark) {
     listItem: isDark ? "rgba(255,255,255,0.04)" : "#f8fafc",
     listBord: isDark ? "rgba(255,255,255,0.07)" : "#e2e8f0",
 
-    // ── Sidebar specific ──
     sidebar: isDark ? "#0d0e14" : "#ffffff",
     sidebarBord: isDark ? "rgba(255,255,255,0.06)" : "#e2e8f0",
     sidebarLabel: isDark ? "#334155" : "#94a3b8",
