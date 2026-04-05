@@ -37,14 +37,29 @@ export const updateUsers = async (id, username, email, password, role, created_a
 }
 
 export const deleteUsers = async (id) => {
-    try{
-        const [rows] = await pool.query(
-            "DELETE FROM users WHERE id = ?", [id]
-        );
-        return rows;
+  try {
+    const [rows] = await pool.query("SELECT username FROM users WHERE id = ?", [id]);
+    
+    if (rows.length === 0) throw new Error("User not found");
+    
+    const username = rows[0].username;
 
-    }catch(error) {
-        console.error('Error deleting the user:', error);
-        throw error;
-    }
-}
+    await pool.query(`
+      DELETE tl, c, a, dr 
+      FROM tasks t
+      LEFT JOIN time_logs tl ON tl.task_id = t.id
+      LEFT JOIN comments c ON c.task_id = t.id
+      LEFT JOIN attachments a ON a.task_id = t.id
+      LEFT JOIN delay_reasons dr ON dr.task_id = t.id
+      WHERE t.assignee = ?`, [username]);
+
+    await pool.query("DELETE FROM tasks WHERE assignee = ?", [username]);
+
+    const [result] = await pool.query("DELETE FROM users WHERE id = ?", [id]);
+    
+    return result;
+  } catch (error) {
+    console.error("Error deleting the user", error);
+    throw error;
+  }
+};

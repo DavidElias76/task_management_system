@@ -31,8 +31,6 @@ export default function TasksPanel({ task, currentUser, onBack, onTaskUpdated })
   const [notification, setNotification] = useState("");
   const [isDelayed, setIsDelayed] = useState(false);
   const [uploading, setUploading] = useState(false);
-
-
   const { isDark, T } = useContext(ThemeContext);
   const priority = PRIORITY_STYLES[task.priority] ?? PRIORITY_STYLES.medium;
 

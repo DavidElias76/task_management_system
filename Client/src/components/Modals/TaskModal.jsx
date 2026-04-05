@@ -10,7 +10,7 @@ import { ThemeContext } from "../../context/ThemeContext.jsx";
 const BASE_URL = "http://localhost:8080";
 const today = new Date().toISOString().split("T")[0];
 
-export default function TaskModal({ isOpen, onClose, onTaskAdded, task }) {
+export default function TaskModal({ isOpen, onClose, onTaskAdded, task, onTaskEdited }) {
   const { users } = useContext(TasksContext);
   const { user } = useContext(AuthContext);
   const { isDark, T } = useContext(ThemeContext);
@@ -60,6 +60,7 @@ export default function TaskModal({ isOpen, onClose, onTaskAdded, task }) {
     if (isEditing) {
       const { created_at, ...updateData } = form;
       await axios.put(`${BASE_URL}/api/tasks/${task.id}`, updateData, { withCredentials: true });
+      onTaskEdited();
     } else {
       await axios.post(`${BASE_URL}/api/tasks/add`, form, { withCredentials: true });
     }

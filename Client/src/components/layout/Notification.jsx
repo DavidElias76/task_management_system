@@ -24,7 +24,7 @@ export default function TopNotification({ message, onClose }) {
     >
       <div className="flex items-center gap-2">
         <Bell size={16} style={{ color: "#a78bfa" }} />
-        <p className="text-sm font-medium m-0" style={{ color: 'white' }}>{message}</p>
+        <p className="text-sm font-medium m-0" style={{ color: T.head }}>{message}</p>
       </div>
       <button
         onClick={() => { setShowNotification(false); onClose?.(); }}

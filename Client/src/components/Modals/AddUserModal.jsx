@@ -5,12 +5,15 @@ import { useState, useContext } from "react";
 import axios from 'axios';
 import { ThemeContext } from "../../context/ThemeContext.jsx";
 import toast from "react-hot-toast";
+import { Eye, EyeOff } from "lucide-react";
+
 
 const BASE_URL = "http://localhost:8080";
 
-export default function AddUserModal({ isUserOpen, setIsUserOpen, onUserAdded, user }) {
+export default function AddUserModal({ isUserOpen, setIsUserOpen, onUserAdded, user, onUserEdited }) {
   const { isDark, T } = useContext(ThemeContext);
   const isEditingUser = !!user;
+  const [showPasswords, setShowPasswords] = useState(false);
 
   const [userData, setUserData] = useState(
     isEditingUser
@@ -38,9 +41,9 @@ export default function AddUserModal({ isUserOpen, setIsUserOpen, onUserAdded, u
     try {
       if (isEditingUser) {
         await axios.put(`${BASE_URL}/api/users/${user.id}`, userData);
+        onUserEdited();
       } else {
         await axios.post(`${BASE_URL}/api/users/add`, userData);
-        toast.success("user added successfully!");
       }
       setUserData({ username: "", email: "", password: "", role: "", created_at: "" });
       setError("");
@@ -147,11 +150,22 @@ export default function AddUserModal({ isUserOpen, setIsUserOpen, onUserAdded, u
                     style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
                 </div>
 
-                <div>
+                <div className="relative mt-1"> 
                   <label style={labelStyle}>Password <span style={{ color: '#f87171' }}>*</span></label>
-                  <input type="password" name="password" placeholder="••••••••"
+                  <input 
+                    type= {showPasswords ? "text": "password"} 
+                    name="password" 
+                    placeholder="••••••••"
                     onChange={handleChange} value={userData.password}
-                    style={inputStyle} onFocus={onFocus} onBlur={onBlur} />
+                    style={inputStyle} onFocus={onFocus} onBlur={onBlur} 
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswords(!showPasswords)}
+                    className="absolute right-3 top-3/4 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  >
+                    {showPasswords ? <EyeOff size={15} /> : <Eye size={15} />}
+                  </button>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">

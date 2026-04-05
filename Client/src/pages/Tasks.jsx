@@ -102,7 +102,8 @@ export default function Tasks() {
         key={editingTask ? editingTask.id : 'new'}
         isOpen={isTaskOpen}
         onClose={() => { setIsTaskOpen(false); setEditingTask(null); }}
-        onTaskAdded={() => { refetch(); setNotification('Task added successfully!'); }}
+        onTaskAdded={() => { refetch(); setNotification('Task added successfully'); }}
+        onTaskEdited ={() => {refetch(); setNotification('Task edited successfuly')}}
         task={editingTask}
       />
 

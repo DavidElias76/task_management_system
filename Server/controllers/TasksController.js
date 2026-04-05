@@ -84,7 +84,6 @@ export const updateTaskController = async (req, res) => {
     }
 
     res.status(200).json({ message: 'Task updated successfully' });
-    console.log('Task updated successfully');
 
   } catch (error) {
     console.error('Error updating task:', error);

@@ -6,6 +6,7 @@ import AddUserModal from "../components/Modals/AddUserModal.jsx";
 import formatDate from "../utils/formatDate.js";
 import useDebounce from "../hooks/UsersDebounce.js";
 import axios from "axios";
+import TopNotification from "../components/layout/Notification.jsx";
 
 const avatarPalette = [
   "#7c3aed", "#0284c7", "#059669","#d97706","#db2777","#4f46e5"
@@ -19,7 +20,8 @@ export default function Users() {
   const [isUserOpen, setIsUserOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [edituser, setEditUser] = useState(null);
-  
+  const [notification, setNotification] = useState(false)
+
   const debouncedSearch = useDebounce(search, 300);
 
   const filteredUsers = users.filter((u) => {
@@ -41,6 +43,7 @@ export default function Users() {
     try {
       await axios.delete(`http://localhost:8080/api/users/${id}`);
       refetchUsers();
+      setNotification('User deleted successfully')
     } catch (e) {
       console.error(e);
     }
@@ -79,6 +82,9 @@ export default function Users() {
           {error}
         </div>
       )}
+
+      {notification && ( <TopNotification message={notification} onClose={() => setNotification("")}/>)}     
+      
 
       <div className="flex items-center justify-between mb-7">
         <div>
@@ -127,7 +133,14 @@ export default function Users() {
               setIsUserOpen(false);
               setEditUser(null);
             }}
-            onUserAdded={refetchUsers}
+            onUserAdded={() => {
+              refetchUsers();
+              setNotification('User added successfully!');
+            }}
+            onUserEdited={() => {
+              refetchUsers();
+              setNotification('User updated successfully!');
+            }}
             user={edituser}
           />
 

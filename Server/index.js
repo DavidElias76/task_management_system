@@ -15,6 +15,7 @@ const users = [
   { username: "MikeMuchiri",email: "mikeMuchiri@example.com",   password: "mike411",   role: "User" },
   {username: "SusanWanjiru",email: "susanwanjiru@example.com",   password: "susan123",   role: "User" },
   {username: "VictorKiamba",email: "victorkiamba@example.com",   password: "victor768",   role: "User" },
+  {username: "MichaelMwangi",email: "michealmwangi@gmail.com",   password: "michael456",   role: "User" },
 ];
 
 async function seedUsers() {
