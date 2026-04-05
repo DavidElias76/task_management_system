@@ -11,6 +11,13 @@ A full-stack web application for managing tasks across teams, built with React 1
 - **Manager** — create, assign, edit, and delete tasks; view team performance dashboard
 - **User** — view and work on assigned tasks, track time, add comments, upload files
 
+### Authentication
+- JWT-based authentication — token signed on login and sent as an HTTP-only cookie
+- Cookie automatically attached to every request via `withCredentials: true` in Axios
+- Token verified on the backend for every protected route
+- Logout clears the cookie and invalidates the session
+- Role extracted from JWT payload to enforce access control
+
 ### Task Management
 - Create, edit, and delete tasks with title, description, priority, due date, assignee, category, and estimated hours
 - Real-time search with debounce across title, status, priority, and assignee
@@ -78,9 +85,11 @@ A full-stack web application for managing tasks across teams, built with React 1
 | Express.js | Web framework |
 | MySQL2 | Database driver |
 | Multer | File upload handling |
-| express-session | Session management |
+| jsonwebtoken | JWT token generation and verification |
+| cookie-parser | Parse JWT token from HTTP-only cookies |
 | dotenv | Environment variables |
 | cors | Cross-origin requests |
+
 
 ### Database
 - MySQL 8.x
@@ -221,7 +230,7 @@ DB_HOST=localhost
 DB_USER=your_mysql_username
 DB_PASSWORD=your_mysql_password
 DB_NAME=tms_db
-SESSION_SECRET=your_secret_key_here
+JWT_SECRET=your_jwt_secret_key_here
 PORT=8080
 ```
 
@@ -260,9 +269,9 @@ The frontend will run on `http://localhost:5173`
 ### Authentication
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/auth/login` | Login and create session |
-| POST | `/api/auth/logout` | Logout and destroy session |
-| GET | `/api/auth/me` | Get current logged-in user |
+| POST | `/api/auth/login` | Authenticate user, sign JWT, set HTTP-only cookie |
+| POST | `/api/auth/logout` | Clear JWT cookie and log out |
+| GET | `/api/auth/me` | Verify JWT from cookie, return current user |
 
 ### Tasks
 | Method | Endpoint | Description |
@@ -300,7 +309,7 @@ The frontend will run on `http://localhost:5173`
 | `DB_USER` | MySQL username | — |
 | `DB_PASSWORD` | MySQL password | — |
 | `DB_NAME` | Database name | `tms_db` |
-| `SESSION_SECRET` | Session secret key | — |
+| `JWT_SECRET` | Secret key for signing JWT tokens | — |
 | `PORT` | Backend server port | `8080` |
 
 ---
